@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+interface FormaGeometrica {
+    double calcularArea();
+    double calcularPerimetro();
+}
+
+class Retangulo implements FormaGeometrica {
+    private double largura;
+    private double altura;
+
+    public Retangulo(double largura, double altura) {
+        this.largura = largura;
+        this.altura = altura;
+    }
+
+    @Override
+    public double calcularArea() {
+        return largura * altura;
+    }
+
+    @Override
+    public double calcularPerimetro() {
+        return 2 * (largura + altura);
+    }
+}
+
+class Circulo implements FormaGeometrica {
+    private double raio;
+
+    public Circulo(double raio) {
+        this.raio = raio;
+    }
+
+    @Override
+    public double calcularArea() {
+        return Math.PI * raio * raio;
+    }
+
+    @Override
+    public double calcularPerimetro() {
+        return 2 * Math.PI * raio;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Cálculo para Retângulo:");
+        System.out.print("Digite a largura: ");
+        double largura = scanner.nextDouble();
+        System.out.print("Digite a altura: ");
+        double altura = scanner.nextDouble();
+        Retangulo retangulo = new Retangulo(largura, altura);
+
+        System.out.println("\nCálculo para Círculo:");
+        System.out.print("Digite o raio: ");
+        double raio = scanner.nextDouble();
+        Circulo circulo = new Circulo(raio);
+
+        System.out.println("\nResultados:");
+        System.out.printf("Retângulo - Área: %.2f, Perímetro: %.2f\n", 
+                         retangulo.calcularArea(), retangulo.calcularPerimetro());
+        System.out.printf("Círculo - Área: %.2f, Perímetro: %.2f\n", 
+                         circulo.calcularArea(), circulo.calcularPerimetro());
+
+        scanner.close();
+    }
+}
