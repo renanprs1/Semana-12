@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+interface Pagamento {
+    void realizarPagamento(double valor);
+}
+
+class CartaoCredito implements Pagamento {
+    @Override
+    public void realizarPagamento(double valor) {
+        System.out.printf("\nPagamento de R$ %.2f realizado com Cartão de Crédito.\n", valor);
+    }
+}
+
+class BoletoBancario implements Pagamento {
+    @Override
+    public void realizarPagamento(double valor) {
+        System.out.printf("\nPagamento de R$ %.2f realizado com Boleto Bancário.\n", valor);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Escolha a forma de pagamento:");
+        System.out.println("1 - Cartão de Crédito");
+        System.out.println("2 - Boleto Bancário");
+        System.out.print("Digite sua opção: ");
+        int opcao = scanner.nextInt();
+        
+        System.out.print("Digite o valor a ser pago: R$ ");
+        double valor = scanner.nextDouble();
+        
+        Pagamento formaPagamento;
+        
+        if (opcao == 1) {
+            formaPagamento = new CartaoCredito();
+        } else if (opcao == 2) {
+            formaPagamento = new BoletoBancario();
+        } else {
+            System.out.println("Opção inválida!");
+            scanner.close();
+            return;
+        }
+        
+        formaPagamento.realizarPagamento(valor);
+        scanner.close();
+    }
+}
